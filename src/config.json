@@ -1,0 +1,16 @@
+{
+  "port": 3000,
+  "database": {
+    "uri": "mongodb://localhost:27017/",
+    "name": "blockchain"
+  },
+  "tcp": {
+    "port": 8124
+  },
+  "exchange": {
+    "secret": "exchange-secret-password"
+  },
+  "miner": {
+    "secret": "miner-secret-password"
+  }
+}
