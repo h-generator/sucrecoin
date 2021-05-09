@@ -1,18 +1,17 @@
 const {
 	startStorage,
 	app,
-	exchange,
+	miner,
 	encoder
 } = require('./components');
-const { miner } = require('./config.json');
+const config = require('./config.json');
 
 (async () => {
 	try {
-		encoder.setSecret(miner.secret);
-		await startStorage();
-		await exchange.miner.server.setupMiner();
+		encoder.setSecret(config.miner.secret);
+		//await startStorage();
+		await miner.server.setupMiner();
 		app.listen(3000);
-		encoder.encrypt({ test:"test" });
 	} catch (err) {
 		console.log(err);
 	}

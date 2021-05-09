@@ -1,5 +1,5 @@
 const { server } = require('./server');
-const { JsonData } = require('../../parser');
+const { JsonData } = require('../parser');
 const {
   createECDH,
   ECDH,

@@ -2,7 +2,8 @@ const { startStorage, getCollection } = require('./database');
 const { encoder } = require('./encoder');
 const { iot } = require('./iot');
 const { app } = require('./server');
-const exchange = require('./exchange');
+const miner = require('./miner-exchange');
+//const exchange = require('./miner-exchange');
 const { JsonData } = require('./parser');
 
 module.exports = {
@@ -11,6 +12,6 @@ module.exports = {
   encoder,
   iot,
   app,
-  exchange,
+  miner,
   JsonData,
 };

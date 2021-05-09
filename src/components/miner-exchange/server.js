@@ -2,7 +2,7 @@ const net = require('net');
 const { v4 } = require('uuid');
 const { interval, fromEvent } = require('rxjs');
 const { tap, map } = require('rxjs/operators');
-const { encoder } = require('../../encoder');
+const { encoder } = require('../encoder');
 const { EVENTS } = require('./events.constants');
 const { CONNECTION } = require('./miner.constants');
 const { listener } = require('./listener');
@@ -24,8 +24,8 @@ server.on(EVENTS.ERROR, (err) => {
 });
 
 server.on(EVENTS.CONNECTION, (socket) => {
-  console.log('client connected: ' + socket.remoteAddress + ':' + socket.remotePort);
   socket._id = v4();
+  console.log(`miner connected: ${socket._id}`);
   sockets.push(socket);
   socket.write(encoder.encrypt({ type: CONNECTION, _id: socket._id }));
 
@@ -38,12 +38,12 @@ server.on(EVENTS.CONNECTION, (socket) => {
   };
   
   const decrypt = (message) => {
-    console.log('client connected: ' + socket.remoteAddress + ':' + socket.remotePort);
     const encrypted = message.toString();
     const data = encoder.decrypt(encrypted);
     if (!data.type) {
       throw new Error('wrong server message type');
     }
+    console.log(`miner message: ${socket._id} ${data.type}`);
     return data;
   };
 
@@ -66,21 +66,12 @@ server.on(EVENTS.CONNECTION, (socket) => {
     error: (err) => errorMessage(err)
   });
 
-  socket.on(EVENTS.CLOSE, function(data) {
-    console.log('fineeeeeeeeeeeeeeee');
-    console.log(sockets.length);
-    console.log(socket._id);
+  socket.on(EVENTS.CLOSE, function() {
     sockets = sockets.filter((o) => o._id != socket._id);
-    
-    // let index = sockets.findIndex(function(o) {
-    //     return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
-    // })
-    // if (index !== -1) sockets.splice(index, 1);
-    // console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
   });
 
   socket.on(EVENTS.END, () => {
-    console.log(`'client disconnected: ${socket.remoteAddress}:${socket.remotePort}`);
+    console.log(`miner disconnected: ${socket._id}`);
   });
 });
 
