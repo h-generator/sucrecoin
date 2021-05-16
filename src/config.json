@@ -4,13 +4,13 @@
     "uri": "mongodb://localhost:27017/",
     "name": "blockchain"
   },
-  "tcp": {
-    "port": 8124
-  },
   "exchange": {
     "secret": "exchange-secret-password"
   },
   "miner": {
+    "server": {
+      "port": 8124
+    },
     "secret": "miner-secret-password"
   }
 }

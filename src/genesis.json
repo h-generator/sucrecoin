@@ -1,15 +1,16 @@
 {
-  "nonce": 12,
-  "timestamp": "2021-04-16T05:16:10.241Z",
-  "parentHash": "f3c94aa22f7907d107298f1acb7c69442f602d556191c2ab53250de658495be4",
-  "difficulty": 1,
-  "height": 1,
+  "index": 1,
+  "hash": "000007cff536af5841a30a481ee44bf2c0ec230ce6bf8fb8b36e3528a6ee6586",
   "version": 1,
-  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "merkleRoot": "",
+  "parentHash": "f3c94aa22f7907d107298f1acb7c69442f602d556191c2ab53250de658495be4",
+  "difficulty": 5,
+  "merkleroot": null,
   "coinbase": {
     "miner": null,
-    "amount": null
+    "reward": null
   },
-  "trx": []
+  "trx": [],
+  "nonce": 479688,
+  "bits": 0,
+  "time": 1618550170241
 }

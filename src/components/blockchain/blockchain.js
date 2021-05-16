@@ -1,19 +1,30 @@
-const { MongoClient } = require('mongodb');
+const { Subject, fromEvent } = require('rxjs');
+const { createHash } = require('crypto');
+const { event, constants } = require('../emitter');
+const { CHAIN } = require('./constants');
+const { getCollection } = require('../database');
+const { map, filter } = require('rxjs/operators');
 
-const config = require('../../config');
-let database = null;
+let current = null;
+const subject = new Subject();
+const validBlockSource = fromEvent(event, constants.VALID_BLOCK);
 
-const startStorage = async () => {
-
+const start = async (genesis) => {
+  current =  current;
+  const collection = getCollection(CHAIN);
+  event.emit(constants.HASH_BLOCK, genesis);
 };
 
-const getCollection = (collection) => {
-};
+subject.subscribe((data) => {
+  console.log(data);
+});
 
-const getlatest = (collection) => {
-};
+validBlockSource.subscribe(async (data) => {
+  const collection = getCollection(CHAIN);
+  await collection.insert(data);
+});
 
 module.exports = {
-  startStorage,
-  getCollection
+  start,
+  observable: subject.asObservable(),
 };

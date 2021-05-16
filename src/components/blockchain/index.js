@@ -1,6 +1,3 @@
-const { startStorage, getCollection } = require('./database');
+const blockchain = require('./blockchain');
 
-module.exports = {
-  startStorage,
-  getCollection
-};
+module.exports = blockchain;

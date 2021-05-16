@@ -2,10 +2,14 @@ const { MongoClient } = require('mongodb');
 
 const config = require('../../config');
 let database = null;
-
+// const client = new MongoClient(
+//   uri, { useUnifiedTopology: true},
+//    { useNewUrlParser: true },
+//     { connectTimeoutMS: 30000 }, { keepAlive: 1});
 const startStorage = async () => {
   const client = new MongoClient(config.database.uri, {
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
   });
   try {
     await client.connect();
@@ -13,9 +17,11 @@ const startStorage = async () => {
     console.log('connected successfully to database');
   } catch(err) {
     console.log(err);
-  } finally {
-    await client.close();
   }
+};
+
+const closeStorage = async () => {
+  await client.close();
 };
 
 const getCollection = (collection) => {
@@ -27,5 +33,6 @@ const getCollection = (collection) => {
 
 module.exports = {
   startStorage,
+  closeStorage,
   getCollection
 };
