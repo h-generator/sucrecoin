@@ -23,7 +23,6 @@ blockSource.subscribe((data) => {
 });
 
 minersSource.subscribe(() => {
-  console.log(block);
   if (!block) {
     return;
   }

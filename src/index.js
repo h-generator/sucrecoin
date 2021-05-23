@@ -14,7 +14,7 @@ const genesis = require('./genesis.json');
 		encoder.setSecret(config.miner.secret);
 		await miner.server.start(config.miner.server.port);
 		await blockchain.start(genesis);
-		app.listen(3000);
+		app.listen(config.port);
 	} catch (err) {
 		console.log(err);
 	}
